@@ -1,8 +1,10 @@
+import java.util.InputMismatchException;
+
 public class Caballo {
-    public static String main (String arg) {
-        char letra =  Character.toUpperCase(arg.charAt(0));
-        int valorLetra = letra - '@';
-        int numero = arg.charAt(1);
+    public static String[] main(String arg) {
+        char letra = Character.toUpperCase(arg.charAt(0));
+        int valorLetra = (letra - '@') - 1;
+        int numero = 8 - (arg.charAt(1) - '0');
 
         String[][] matriz = {
                 {"A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8"},
@@ -15,6 +17,35 @@ public class Caballo {
                 {"A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"},
         };
 
-        return ("matriz[8][8] es "+matriz[7][7]);
+        String[] result = new String[8];
+
+        int cont = 0;
+        for (int i = -2; i < 3; i++) {
+            if (i != 0) {
+                if (i % 2 == 0) {
+                    for (int o = -1; o < 2; o += 2) {
+                        try {
+                            result[cont] = matriz[numero + i][valorLetra + o];
+                            cont++;
+                        } catch (IndexOutOfBoundsException e) {
+                            result[cont] = "X";
+                            cont++;
+                        }
+                    }
+                } else {
+                    for (int o = -2; o < 3; o += 4) {
+                        try {
+                            result[cont] = matriz[numero + i][valorLetra + o];
+                            cont++;
+                        } catch (IndexOutOfBoundsException e){
+                            result[cont] = "X";
+                            cont++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 }
