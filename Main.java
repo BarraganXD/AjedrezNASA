@@ -40,7 +40,22 @@ public class Main {
 
         switch (ficha) {
             case "1":
-                //Llamar al método del peón
+                String color;
+                do {
+                        System.out.print("Color del peón (B/N): ");
+                        color = sc1.nextLine();
+                        if (color.matches("[BbNn]")) {
+                            exit = true;
+                        } else {
+                            System.out.println("Opción incorrecta");
+                            exit = false;
+                        }
+                } while (!exit);
+                if (color.matches("[Bb]")) {
+                    pintarMapa(command, PeonB.main(command));
+                } else if (color.matches("[Nn]")){
+                    pintarMapa(command, PeonN.main(command));
+                }
                 break;
             case "2":
                 //Llamar al método de la torre
