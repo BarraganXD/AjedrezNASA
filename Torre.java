@@ -1,5 +1,6 @@
-public class PeonN {
+public class Torre {
     public static String[] main(String arg) {
+
         char letra = Character.toUpperCase(arg.charAt(0));
         int valorLetra = (letra - '@') - 1;
         int numero = 8 - (arg.charAt(1) - '0');
@@ -15,22 +16,24 @@ public class PeonN {
                 {"A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"},
         };
 
-        String[] result = new String[2];
+        String[] result = new String[16];
 
-        if (numero == 0) {
-            result[0] = "X";
-            result[1] = "X";
-        } else if (numero == 1) {
-            result[0] = matriz[numero + 1][valorLetra];
-            result[1] = matriz[numero + 2][valorLetra];
-        } else if (numero == 7) {
-            result[0] = "X";
-            result[1] = "X";
-        } else {
-            result[0] = matriz[numero + 1][valorLetra];
-            result[1] = "X";
+        for (int i = 0; i < 8; i++) {
+            if (i != numero) {
+                result[i] = matriz[i][valorLetra];
+            } else {
+                result[i] = "X";
+            }
+
         }
 
+        for (int i = 0; i < 8; i++) {
+            if (i != valorLetra) {
+                result[8 + i] = matriz[numero][i];
+            } else {
+                result[8 + i] = "X";
+            }
+        }
         return result;
     }
 }
