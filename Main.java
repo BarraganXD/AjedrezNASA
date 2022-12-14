@@ -70,7 +70,7 @@ public class Main {
                 //Llamar al método de la reina
                 break;
             case "6":
-
+                //Llamar al método del rey
                 break;
         }
     }
