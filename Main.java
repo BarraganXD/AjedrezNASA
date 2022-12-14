@@ -22,7 +22,6 @@ public class Main {
         } while (!exit);
 
         String command = "";
-
         do {
             try {
                 System.out.print("Coordenada de inicio en formato Letra + Número (C3): ");
@@ -70,7 +69,7 @@ public class Main {
                 //Llamar al método de la reina
                 break;
             case "6":
-                //Llamar al método del rey
+                pintarMapa(command, Rey.main(command));
                 break;
         }
     }
