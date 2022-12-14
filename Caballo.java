@@ -1,7 +1,7 @@
 import java.util.InputMismatchException;
 
 public class Caballo {
-    public static String[] main(String arg) {
+    public static String[] calc(String arg) {
         char letra = Character.toUpperCase(arg.charAt(0));
         int valorLetra = (letra - '@') - 1;
         int numero = 8 - (arg.charAt(1) - '0');

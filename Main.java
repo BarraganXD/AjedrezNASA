@@ -52,16 +52,16 @@ public class Main {
                         }
                 } while (!exit);
                 if (color.matches("[Bb]")) {
-                    pintarMapa(command, PeonB.main(command));
+                    pintarMapa(command, PeonB.calc(command));
                 } else if (color.matches("[Nn]")){
-                    pintarMapa(command, PeonN.main(command));
+                    pintarMapa(command, PeonN.calc(command));
                 }
                 break;
             case "2":
                 //Llamar al método de la torre
                 break;
             case "3":
-                pintarMapa(command, Caballo.main(command));
+                pintarMapa(command, Caballo.calc(command));
                 break;
             case "4":
                 //Llamar al método del alfil
@@ -70,7 +70,7 @@ public class Main {
                 //Llamar al método de la reina
                 break;
             case "6":
-                //Llamar al método del rey
+
                 break;
         }
     }
