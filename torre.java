@@ -32,7 +32,6 @@ public class torre {
                 result[8 + i] = matriz[numero][i];
             } else {
                 result[8 + i] = "X";
-
             }
 
         }
