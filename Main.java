@@ -22,7 +22,6 @@ public class Main {
         } while (!exit);
 
         String command = "";
-
         do {
             try {
                 System.out.print("Coordenada de inicio en formato Letra + Número (C3): ");
