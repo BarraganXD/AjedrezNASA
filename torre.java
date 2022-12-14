@@ -33,7 +33,6 @@ public class torre {
             } else {
                 result[8 + i] = "X";
             }
-
         }
         return result;
     }
