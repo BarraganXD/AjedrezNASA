@@ -58,7 +58,7 @@ public class Main {
                 }
                 break;
             case "2":
-                //Llamar al método de la torre
+               pintarMapa(command, torre.main(command));
                 break;
             case "3":
                 pintarMapa(command, Caballo.main(command));
