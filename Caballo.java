@@ -1,3 +1,5 @@
+import java.util.InputMismatchException;
+
 public class Caballo {
     public static String[] main(String arg) {
         char letra = Character.toUpperCase(arg.charAt(0));
