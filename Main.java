@@ -64,6 +64,7 @@ public class Main {
                 break;
             case "4":
                 //Llamar al método del alfil
+                pintarMapa(command, Alfil.alfil(command));
                 break;
             case "5":
                 //Llamar al método de la reina
