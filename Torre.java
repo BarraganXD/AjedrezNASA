@@ -24,7 +24,6 @@ public class Torre {
             } else {
                 result[i] = "X";
             }
-
         }
 
         for (int i = 0; i < 8; i++) {

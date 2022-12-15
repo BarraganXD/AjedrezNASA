@@ -8,9 +8,9 @@ public class Main {
         Scanner sc1 = new Scanner(System.in);
         do {
             try {
-                System.out.print("1 - Peón\n2 - Torre\n3 - Caballo\n4 - Alfil\n5 - Reina\n6 - Rey\nElige una ficha: ");
+                System.out.print("Piezas del ajedrez ->\n1 - Peón\n2 - Torre\n3 - Caballo\n4 - Alfil\n5 - Reina\n6 - Rey\n\nExtras ->\n7 - Kanye West\n\nElige una ficha: ");
                 ficha = sc1.nextLine();
-                if (ficha.matches("[1-6]")) {
+                if (ficha.matches("[1-7]")) {
                     exit = true;
                 } else {
                     throw new Exception("Ficha incorrecta");
@@ -24,7 +24,7 @@ public class Main {
         String command = "";
         do {
             try {
-                System.out.print("Coordenada de inicio en formato Letra + Número (C3): ");
+                System.out.print("\nCoordenada de inicio en formato Letra + Número (C3): ");
                 command = sc1.nextLine();
                 if (command.matches("[a-hA-H][1-8]")) {
                     exit = true;
@@ -41,18 +41,18 @@ public class Main {
             case "1":
                 String color;
                 do {
-                        System.out.print("Color del peón (B/N): ");
-                        color = sc1.nextLine();
-                        if (color.matches("[BbNn]")) {
-                            exit = true;
-                        } else {
-                            System.out.println("Opción incorrecta");
-                            exit = false;
-                        }
+                    System.out.print("Color del peón (B/N): ");
+                    color = sc1.nextLine();
+                    if (color.matches("[BbNn]")) {
+                        exit = true;
+                    } else {
+                        System.out.println("Opción incorrecta");
+                        exit = false;
+                    }
                 } while (!exit);
                 if (color.matches("[Bb]")) {
                     pintarMapa(command, PeonB.main(command));
-                } else if (color.matches("[Nn]")){
+                } else if (color.matches("[Nn]")) {
                     pintarMapa(command, PeonN.main(command));
                 }
                 break;
@@ -63,14 +63,23 @@ public class Main {
                 pintarMapa(command, Caballo.main(command));
                 break;
             case "4":
-                //Llamar al método del alfil
                 pintarMapa(command, Alfil.alfil(command));
                 break;
             case "5":
-                //Llamar al método de la reina
+                String[] suma = new String[44];
+                for (int i = 0; i < Torre.main(command).length; i++) {
+                    suma[i] = Torre.main(command)[i];
+                }
+                for (int i = 0; i < Alfil.alfil(command).length; i++) {
+                    suma[i + 16] = Alfil.alfil(command)[i];
+                }
+                pintarMapa(command, suma);
                 break;
             case "6":
                 pintarMapa(command, Rey.main(command));
+                break;
+            case "7":
+                pintarMapa(command, Extras.KanyeWest.main(command));
                 break;
         }
     }
@@ -102,7 +111,7 @@ public class Main {
         char letra = Character.toUpperCase(inicio.charAt(0));
         int valorLetra = (letra - '@') - 1;
         int numero = 8 - (inicio.charAt(1) - '0');
-        tablero[numero][valorLetra] = "["+GREEN+"0"+RESET+"]";
+        tablero[numero][valorLetra] = "[" + GREEN + "0" + RESET + "]";
 
         for (String S : posiciones) {
             if (!Objects.equals(S, "X")) {
