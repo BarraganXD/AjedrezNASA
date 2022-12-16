@@ -8,9 +8,9 @@ public class Main {
         Scanner sc1 = new Scanner(System.in);
         do {
             try {
-                System.out.print("Piezas del ajedrez ->\n1 - Peón\n2 - Torre\n3 - Caballo\n4 - Alfil\n5 - Reina\n6 - Rey\n\nExtras ->\n7 - Kanye West\n\nElige una ficha: ");
+                System.out.print("Piezas del ajedrez ->\n1 - Peón\n2 - Torre\n3 - Caballo\n4 - Alfil\n5 - Reina\n6 - Rey\n\nExtras ->\n7 - Kanye West\n8 - Happy\n\nElige una ficha: ");
                 ficha = sc1.nextLine();
-                if (ficha.matches("[1-7]")) {
+                if (ficha.matches("[1-8]")) {
                     exit = true;
                 } else {
                     throw new Exception("Ficha incorrecta");
@@ -80,6 +80,9 @@ public class Main {
                 break;
             case "7":
                 pintarMapa(command, Extras.KanyeWest.main(command));
+                break;
+            case "8":
+                pintarMapa(command, Extras.HappyHappy.main(command));
                 break;
         }
     }

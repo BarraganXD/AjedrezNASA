@@ -17,22 +17,22 @@ public class Caballo {
                 {"A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"},
         };
 
-        String[] result = new String[8];
+        String[] result = new String[8]; //El tamaño del array es el maximo de posiciones
 
         int cont = 0;
-        for (int i = -2; i < 3; i++) {
-            if (i != 0) {
-                if (i % 2 == 0) {
+        for (int i = -2; i < 3; i++) { //Este bucle va de 2 filas sobre la ficha a 2 filas por debajo
+            if (i != 0) { //Se evita que calcule posiciones sobre su propia fila
+                if (i % 2 == 0) { //Cuando la fila sea par (2 o -2) entra para variar en 1 la columna
                     for (int o = -1; o < 2; o += 2) {
                         try {
                             result[cont] = matriz[numero + i][valorLetra + o];
                             cont++;
-                        } catch (IndexOutOfBoundsException e) {
-                            result[cont] = "X";
+                        } catch (IndexOutOfBoundsException e) { //Cuando se sale del mapa lo indica con "X" para que
+                            result[cont] = "X";                 //el metodo de pintarMapa lo entienda y no lo pinte
                             cont++;
                         }
                     }
-                } else {
+                } else { //Cuando es impar (1 o -1) entra para variar en 2 la columna
                     for (int o = -2; o < 3; o += 4) {
                         try {
                             result[cont] = matriz[numero + i][valorLetra + o];
