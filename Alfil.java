@@ -13,11 +13,11 @@ public class Alfil {
         char letra = Character.toUpperCase(coordenada.charAt(0));
         int columna = (letra - '@') - 1;
         int fila = 8 - (coordenada.charAt(1) - '0');
-        String[] result = new String[28];
+        String[] result = new String[28]; //El tamaño del array es el maximo de posiciones
 
         int cont = 0;
-        for (int i = 1; i < 8; i++) {
-            for (int e = i; e >= (i * -1); e -= (2 * i)) {
+        for (int i = 1; i < 8; i++) { //7 es la longitud maxima de cada aspa de movimientos del alfil
+            for (int e = i; e >= (i * -1); e -= (2 * i)) { //
                 try {
                     result[cont] = tablero[fila - i][columna + e];
                     cont++;
