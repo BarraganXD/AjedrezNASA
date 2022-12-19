@@ -17,6 +17,7 @@ public class Rey {
                 {"A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"},
         };
         //Se declara la variable del return con el tamaño de las posiciones máximas
+        //9 = 8 posibles más su propia posición
         String[] result = new String[9];
 
         //El contador se inicializa a 0 y cada vez que se escribe en la variable se aumenta en 1
