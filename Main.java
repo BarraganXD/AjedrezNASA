@@ -3,11 +3,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] arg) {
-        //holi
+        //Este booleano se utiliza como recurso para salir de los bucles en los que se pide input
         boolean exit;
         String ficha = "";
         Scanner sc1 = new Scanner(System.in);
         do {
+            //Se muestra el menú y se comprueba que el usuario escoja una opción válida
             try {
                 System.out.print("Piezas del ajedrez ->\n1 - Peón\n2 - Torre\n3 - Caballo\n4 - Alfil\n5 - Reina\n6 - Rey\n\nExtras ->\n7 - Kanye West\n8 - Happy\n\nElige una ficha: ");
                 ficha = sc1.nextLine();
@@ -23,6 +24,7 @@ public class Main {
         } while (!exit);
 
         String command = "";
+        //Se pide la coordenada de inicio y se comprueba que sea válida (A1-H8)
         do {
             try {
                 System.out.print("\nCoordenada de inicio en formato Letra + Número (C3): ");
@@ -38,8 +40,10 @@ public class Main {
             }
         } while (!exit);
 
+        //Según la ficha escogida se llama a un método u otro
         switch (ficha) {
             case "1":
+                //El case del peón es más elaborado por que pregunta el color previamente
                 String color;
                 do {
                     System.out.print("Color del peón (B/N): ");
@@ -67,6 +71,8 @@ public class Main {
                 pintarMapa(command, Alfil.alfil(command));
                 break;
             case "5":
+                //El case de la reina es especial por que no hay un método propio
+                //sino que sumo los resultados de la torre y el alfil
                 String[] suma = new String[44];
                 for (int i = 0; i < Torre.main(command).length; i++) {
                     suma[i] = Torre.main(command)[i];
@@ -86,9 +92,13 @@ public class Main {
                 pintarMapa(command, Extras.HappyHappy.main(command));
                 break;
         }
+        //Se cierra el Scanner por educación
+        sc1.close();
     }
 
     public static void pintarMapa(String inicio, String[] posiciones) {
+        //El array del borde y del mapa se declaran por separado y luego se juntan
+        //De esta manera es más fácil calcular las posiciones del mapa para pintarlas
         String[][] bordes = {
                 {" 8 "},
                 {" 7 "},
@@ -112,11 +122,15 @@ public class Main {
                 {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
         };
 
+        //Se separa la letra y el número de la coordenada para poder tratarlas luego
         char letra = Character.toUpperCase(inicio.charAt(0));
         int valorLetra = (letra - '@') - 1;
         int numero = 8 - (inicio.charAt(1) - '0');
         tablero[numero][valorLetra] = "[" + GREEN + "0" + RESET + "]";
 
+        //Se recorren todas las posiciones posibles que el método en cuestión haya devuelto
+        //por cada posición dada se comprueba si es una "X"
+        //si es una "X" se ignora, si es una coordenada se separa la letra del número y se ubica para pintarlo
         for (String S : posiciones) {
             if (!Objects.equals(S, "X")) {
                 char letraP = Character.toUpperCase(S.charAt(0));
@@ -127,6 +141,8 @@ public class Main {
         }
 
 
+        //El bucle general va contando fila a fila
+        //Por cada iteración se pinta una fila de los bordes seduigo de una fila del tablero
         for (int i = 0; i < tablero.length; i++) {
             for (int X = 0; X < bordes[i].length; X++) {
                 System.out.print(bordes[i][X]);
@@ -136,11 +152,14 @@ public class Main {
             }
             System.out.print("\n");
         }
+
+        //Cuando se termina de pintar el mapa con los números a la derecha, se pintan las letras
         for (int L = 0; L < bordes[8].length; L++) {
             System.out.print(bordes[8][L]);
         }
     }
 
+    //Estos métodos se usan para pintar la ficha y las posiciones de colores
     public static final String GREEN = "\u001B[32m";
     public static final String YELLOW = "\u001B[33m";
     public static final String RESET = "\u001B[0m";
