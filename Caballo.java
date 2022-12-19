@@ -1,11 +1,11 @@
-import java.util.InputMismatchException;
-
 public class Caballo {
     public static String[] main(String arg) {
+        //Se separa la letra y el número de la coordenada para operar
         char letra = Character.toUpperCase(arg.charAt(0));
         int valorLetra = (letra - '@') - 1;
         int numero = 8 - (arg.charAt(1) - '0');
 
+        //Se declara la matriz de la que seleccionaremos las posiciones
         String[][] matriz = {
                 {"A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8"},
                 {"A7", "B7", "C7", "D7", "E7", "F7", "G7", "H7"},
@@ -17,27 +17,34 @@ public class Caballo {
                 {"A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"},
         };
 
-        String[] result = new String[8]; //El tamaño del array es el maximo de posiciones
+        //Se declara la variable del return con el tamaño de las posiciones máximas
+        //8 = 8 posibles posiciones SIN contarse a sí mismo
+        String[] result = new String[8];
 
+        //El contador se inicializa a 0 y cada vez que se escribe en la variable se aumenta en 1
         int cont = 0;
-        for (int i = -2; i < 3; i++) { //Este bucle va de 2 filas sobre la ficha a 2 filas por debajo
-            if (i != 0) { //Se evita que calcule posiciones sobre su propia fila
-                if (i % 2 == 0) { //Cuando la fila sea par (2 o -2) entra para variar en 1 la columna
+
+        //El bucle general cuenta desde arriba del caballo hasta abajo
+        //Si varía en 2, significa que debe variar en 1 hacia los lados
+        //Si varía en 1, significa que debe variar en 2 hacia los lados
+        for (int i = -2; i < 3; i++) {
+            if (i != 0) { //Evitamos que calcule posiciones sobre su propia fila
+                if (i % 2 == 0) { //Si está en una fila par se moverá en 1 para la horizontal
                     for (int o = -1; o < 2; o += 2) {
                         try {
                             result[cont] = matriz[numero + i][valorLetra + o];
                             cont++;
-                        } catch (IndexOutOfBoundsException e) { //Cuando se sale del mapa lo indica con "X" para que
-                            result[cont] = "X";                 //el metodo de pintarMapa lo entienda y no lo pinte
+                        } catch (IndexOutOfBoundsException e) { //Si se sale del tablero pinta una "X"
+                            result[cont] = "X";
                             cont++;
                         }
                     }
-                } else { //Cuando es impar (1 o -1) entra para variar en 2 la columna
+                } else { //Si está en una fila impar se moverá en 2 para la horizontal
                     for (int o = -2; o < 3; o += 4) {
                         try {
                             result[cont] = matriz[numero + i][valorLetra + o];
                             cont++;
-                        } catch (IndexOutOfBoundsException e){
+                        } catch (IndexOutOfBoundsException e){ //Si se sale del tablero pinta una "X"
                             result[cont] = "X";
                             cont++;
                         }
@@ -46,6 +53,7 @@ public class Caballo {
             }
         }
 
+        //Al final devolvemos la ristra de resultados
         return result;
     }
 }
