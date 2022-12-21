@@ -3,95 +3,111 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] arg) {
-        //Este booleano se utiliza como recurso para salir de los bucles en los que se pide input
         boolean exit;
-        String ficha = "";
         Scanner sc1 = new Scanner(System.in);
         do {
-            //Se muestra el menú y se comprueba que el usuario escoja una opción válida
-            try {
-                System.out.print("Piezas del ajedrez ->\n1 - Peón\n2 - Torre\n3 - Caballo\n4 - Alfil\n5 - Reina\n6 - Rey\n\nExtras ->\n7 - Kanye West\n8 - Happy\n\nElige una ficha: ");
-                ficha = sc1.nextLine();
-                if (ficha.matches("[1-8]")) {
-                    exit = true;
-                } else {
-                    throw new Exception("Ficha incorrecta");
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                exit = false;
-            }
-        } while (!exit);
-
-        String command = "";
-        //Se pide la coordenada de inicio y se comprueba que sea válida (A1-H8)
-        do {
-            try {
-                System.out.print("\nCoordenada de inicio en formato Letra + Número (C3): ");
-                command = sc1.nextLine();
-                if (command.matches("[a-hA-H][1-8]")) {
-                    exit = true;
-                } else {
-                    throw new Exception("Coordenada incorrecta");
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                exit = false;
-            }
-        } while (!exit);
-
-        //Según la ficha escogida se llama a un método u otro
-        switch (ficha) {
-            case "1":
-                //El case del peón es más elaborado por que pregunta el color previamente
-                String color;
-                do {
-                    System.out.print("Color del peón (B/N): ");
-                    color = sc1.nextLine();
-                    if (color.matches("[BbNn]")) {
+            //Este booleano se utiliza como recurso para salir de los bucles en los que se pide input
+            String ficha = "";
+            do {
+                //Se muestra el menú y se comprueba que el usuario escoja una opción válida
+                try {
+                    System.out.print("\nPiezas del ajedrez ->\n1 - Peón\n2 - Torre\n3 - Caballo\n4 - Alfil\n5 - Reina\n6 - Rey\n\nElige una ficha: ");
+                    ficha = sc1.nextLine();
+                    if (ficha.matches("[1-6]")) {
                         exit = true;
                     } else {
-                        System.out.println("Opción incorrecta");
-                        exit = false;
+                        throw new Exception("Ficha incorrecta");
                     }
-                } while (!exit);
-                if (color.matches("[Bb]")) {
-                    pintarMapa(command, PeonB.main(command));
-                } else if (color.matches("[Nn]")) {
-                    pintarMapa(command, PeonN.main(command));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    exit = false;
                 }
-                break;
-            case "2":
-                pintarMapa(command, Torre.main(command));
-                break;
-            case "3":
-                pintarMapa(command, Caballo.main(command));
-                break;
-            case "4":
-                pintarMapa(command, Alfil.alfil(command));
-                break;
-            case "5":
-                //El case de la reina es especial por que no hay un método propio
-                //sino que sumo los resultados de la torre y el alfil
-                String[] suma = new String[44];
-                for (int i = 0; i < Torre.main(command).length; i++) {
-                    suma[i] = Torre.main(command)[i];
+            } while (!exit);
+
+            String command = "";
+            //Se pide la coordenada de inicio y se comprueba que sea válida (A1-H8)
+            do {
+                try {
+                    System.out.print("\nCoordenada de inicio en formato Letra + Número (C3): ");
+                    command = sc1.nextLine();
+                    if (command.matches("[a-hA-H][1-8]")) {
+                        exit = true;
+                    } else {
+                        throw new Exception("Coordenada incorrecta");
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    exit = false;
                 }
-                for (int i = 0; i < Alfil.alfil(command).length; i++) {
-                    suma[i + 16] = Alfil.alfil(command)[i];
+            } while (!exit);
+
+            //Según la ficha escogida se llama a un método u otro
+            switch (ficha) {
+                case "1":
+                    //El case del peón es más elaborado por que pregunta el color previamente
+                    String color;
+                    do {
+                        System.out.print("Color del peón (B/N): ");
+                        color = sc1.nextLine();
+                        if (color.matches("[BbNn]")) {
+                            exit = true;
+                        } else {
+                            System.out.println("Opción incorrecta");
+                            exit = false;
+                        }
+                    } while (!exit);
+                    if (color.matches("[Bb]")) {
+                        if (command.matches("[a-hA-H]1")) {
+                            System.out.println("\nPosición ilegal: Ningun movimiento posible");
+                        } else {
+                            pintarMapa(command, PeonB.main(command));
+                        }
+                    } else if (color.matches("[Nn]")) {
+                        if (command.matches("[a-hA-H]8")) {
+                            System.out.println("\nPosición ilegal: Ningun movimiento posible");
+                        } else {
+                            pintarMapa(command, PeonN.main(command));
+                        }
+                    }
+                    break;
+                case "2":
+                    pintarMapa(command, Torre.main(command));
+                    break;
+                case "3":
+                    pintarMapa(command, Caballo.main(command));
+                    break;
+                case "4":
+                    pintarMapa(command, Alfil.alfil(command));
+                    break;
+                case "5":
+                    //El case de la reina es especial por que no hay un método propio
+                    //sino que sumo los resultados de la torre y el alfil
+                    String[] suma = new String[44];
+                    for (int i = 0; i < Torre.main(command).length; i++) {
+                        suma[i] = Torre.main(command)[i];
+                    }
+                    for (int i = 0; i < Alfil.alfil(command).length; i++) {
+                        suma[i + 16] = Alfil.alfil(command)[i];
+                    }
+                    pintarMapa(command, suma);
+                    break;
+                case "6":
+                    pintarMapa(command, Rey.main(command));
+                    break;
+            }
+
+            String repeat;
+            do {
+                System.out.print("\n\nRepetir el programa (S/N): ");
+                repeat = sc1.nextLine();
+                if (repeat.equals("S")) {
+                    exit = false;
+                } else if (repeat.equals("N")){
+                    exit = true;
                 }
-                pintarMapa(command, suma);
-                break;
-            case "6":
-                pintarMapa(command, Rey.main(command));
-                break;
-            case "7":
-                pintarMapa(command, Extras.KanyeWest.main(command));
-                break;
-            case "8":
-                pintarMapa(command, Extras.HappyHappy.main(command));
-                break;
-        }
+            } while (!repeat.matches("[SN]"));
+        } while(!exit);
+        System.out.println("\n¡Hasta la próxima!");
         //Se cierra el Scanner por educación
         sc1.close();
     }
